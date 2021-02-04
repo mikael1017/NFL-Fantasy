@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   RadioGroup,
   FormControlLabel,
   Radio,
   FormControl,
   FormLabel,
-  useState,
 } from "@material-ui/core";
 import "./Draft.css";
 import Button from "@material-ui/core/Button";
@@ -13,11 +12,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 export default function Draft() {
-  const [numOfPlayer, setNumOfPlayer] = useState();
+  const [NumOfPlayer, setNumOfPlayer] = useState(8);
 
-  function handleButtonClick(number) {
-    setNumOfPlayer(number);
-  }
   return (
     <>
       <Grid className="buttons" container spacing={1}>
@@ -32,19 +28,25 @@ export default function Draft() {
                 control={<Radio color="primary" />}
                 value="8"
                 label="8"
-                onclick={handleButtonClick(8)}
+                onChange={(e) => {
+                  setNumOfPlayer(e.target.value);
+                }}
               />
               <FormControlLabel
                 control={<Radio color="primary" />}
                 value="10"
                 label="10"
-                onclick={handleButtonClick(10)}
+                onChange={(e) => {
+                  setNumOfPlayer(e.target.value);
+                }}
               />
               <FormControlLabel
                 control={<Radio color="primary" />}
                 value="12"
                 label="12"
-                onclick={handleButtonClick(12)}
+                onChange={(e) => {
+                  setNumOfPlayer(e.target.value);
+                }}
               />
             </RadioGroup>
           </FormControl>
@@ -53,7 +55,7 @@ export default function Draft() {
           <Button
             color="primary"
             variant="contained"
-            to="/mockdraft"
+            to={"/mockdraft/" + NumOfPlayer}
             component={Link}
           >
             Start Draft!

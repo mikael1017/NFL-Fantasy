@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 
 export default function DraftPage() {
-  const { numOfPlayer } = useParams();
+  // const { numOfPlayer } = useParams();
   return (
     <Grid>
       <Typography>Welcome to the Mock Draft!</Typography>
