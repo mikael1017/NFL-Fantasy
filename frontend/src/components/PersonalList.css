@@ -1,0 +1,47 @@
+:root {
+  font-size: 16px;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.flex-full {
+  width: 100%;
+  flex: 1;
+}
+
+caption {
+  text-align: left;
+  font-size: 35px;
+  padding-left: 2rem;
+  border-top: 5px solid gainsboro;
+  border-left: 8px solid gainsboro;
+  border-right: 8px solid gainsboro;
+}
+
+i {
+  color: rgb(255, 240, 245);
+  font-size: 20px;
+}
+
+i:hover {
+  color: rgb(0, 0, 0);
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.flex-full {
+  width: 100%;
+  flex: 1;
+  text-align: center;
+  padding-top: 25%;
+  padding-right: 5px;
+}

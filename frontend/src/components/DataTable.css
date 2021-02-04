@@ -1,0 +1,119 @@
+.title {
+  font-family: "Raleway", sans-serif;
+  font-size: 62px;
+  font-weight: 800;
+  line-height: 72px;
+  margin: 0 0 24px;
+  text-align: center;
+  text-transform: uppercase;
+  padding-bottom: 2rem;
+}
+#players div {
+  text-align: center;
+}
+#players {
+  table-layout: auto;
+  display: table;
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+table th,
+tfoot td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4caf50;
+  color: white;
+}
+
+.global-filter {
+  text-align: center;
+  font-weight: 800;
+}
+
+.draggableRow {
+  display: table;
+}
+
+#players th {
+  position: sticky;
+  top: 0;
+}
+
+.table-container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 2rem;
+  border: 1px solid #ddd;
+}
+.sticky-cell {
+  position: sticky;
+  left: 0;
+  background: #f5f7fa;
+  border-left: solid 2px #ddefef;
+  border-right: solid 2px #ddefef;
+}
+.sticky-column {
+  position: sticky;
+  background: #4caf50;
+  border-left: solid 2px #ddefef;
+  border-right: solid 2px #ddefef;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.column {
+  position: sticky;
+  top: 0;
+}
+
+.export-btn {
+  position: relative;
+  left: 50%;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+/* h1 {
+  color: #ffffff;
+  font-family: "Raleway", sans-serif;
+  font-size: 62px;
+  font-weight: 800;
+  line-height: 72px;
+  margin: 0 0 24px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h2 {
+  color: #ffffff;
+  font-family: "Raleway", sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 36px;
+  margin: 0 0 24px;
+  text-align: center;
+} */
