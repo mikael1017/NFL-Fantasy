@@ -11,7 +11,7 @@ export default function Data() {
   const [RBs, setRBs] = useState();
 
   function fetchByPos(pos, setMethod) {
-    fetch("api/player/pos/" + pos)
+    fetch("/api/player/pos/" + pos)
       .then((response) => response.json())
       .then((data) => {
         setMethod(data);
