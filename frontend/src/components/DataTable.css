@@ -93,10 +93,20 @@ tfoot td {
 
 .export-btn {
   position: relative;
-  left: 50%;
+  left: 48%;
   margin-top: 2rem;
   margin-bottom: 4rem;
 }
+.save-btn {
+  position: relative;
+  left: 52%;
+}
+
+.reset-btn {
+  position: relative;
+  left: 54%;
+}
+
 /* h1 {
   color: #ffffff;
   font-family: "Raleway", sans-serif;

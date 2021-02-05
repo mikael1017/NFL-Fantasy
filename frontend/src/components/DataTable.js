@@ -7,7 +7,16 @@ import { TableContainer } from "@material-ui/core";
 import SortUpIcon from "./Icons/SortUp.js";
 import SortDownIcon from "./Icons/SortDown.js";
 import ReactToExcel from "react-html-table-to-excel";
+import SaveIcon from "@material-ui/icons/Save";
+import RestoreIcon from "@material-ui/icons/Restore";
+import Button from "@material-ui/core/Button";
 
+function handleSave() {
+  alert("clicked save button");
+}
+function handleReset() {
+  alert("Clicked reset button");
+}
 export default function DataTable({ data, title }) {
   const columns = useMemo(() => COLUMNS, []);
   const {
@@ -137,6 +146,24 @@ export default function DataTable({ data, title }) {
           sheet="sheet 1"
           buttonText="Download as XLS"
         />
+        <Button
+          className="save-btn"
+          color="primary"
+          startIcon={<SaveIcon />}
+          variant="contained"
+          onClick={handleSave}
+        >
+          Save
+        </Button>
+        <Button
+          className="reset-btn"
+          color="secondary"
+          startIcon={<RestoreIcon />}
+          variant="contained"
+          onClick={handleReset}
+        >
+          Restore
+        </Button>
       </div>
     </>
   );
