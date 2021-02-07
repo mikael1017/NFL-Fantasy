@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import { COLUMNS } from "./columns";
 import "./DataTable.css";
@@ -11,13 +11,11 @@ import SaveIcon from "@material-ui/icons/Save";
 import RestoreIcon from "@material-ui/icons/Restore";
 import Button from "@material-ui/core/Button";
 
-function handleSave() {
-  alert("clicked save button");
-}
 function handleReset() {
   alert("Clicked reset button");
 }
 export default function DataTable({ data, title }) {
+  const [newData, setNewData] = useState(data);
   const columns = useMemo(() => COLUMNS, []);
   const {
     getTableProps,
@@ -32,6 +30,26 @@ export default function DataTable({ data, title }) {
     },
     useSortBy
   );
+
+  function handleSave() {
+    if (localStorage.getItem(title) != null) {
+      localStorage.removeItem(title);
+    }
+    localStorage.setItem(title, JSON.stringify(newData));
+    alert("clicked save button");
+    console.dir(localStorage.getItem(title));
+  }
+
+  // useEffect(() => {
+  //   localStorage.setItem("table", JSON.stringify(data));
+
+  //   console.dir(localStorage.getItem("table"));
+  // });
+  function swapPosition(newData, before, after) {
+    const row1 = newData[before];
+    newData[before] = newData[after];
+    newData[after] = row1;
+  }
   return (
     <>
       <div className="title">{title} </div>
@@ -44,6 +62,7 @@ export default function DataTable({ data, title }) {
           const srcIdx = param.source.index;
           const desIdx = param.destination.index;
           rows.splice(desIdx, 0, rows.splice(srcIdx, 1)[0]);
+          swapPosition(newData, srcIdx, desIdx);
         }}
       >
         <Droppable droppableId="droppable">

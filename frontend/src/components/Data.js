@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PersonalList from "./PersonalList";
 import "./Data.css";
 import Button from "@material-ui/core/Button";
@@ -11,7 +11,7 @@ export default function Data() {
   const [RBs, setRBs] = useState();
 
   function fetchByPos(pos, setMethod) {
-    fetch("/api/player/pos/" + pos)
+    fetch("api/player/pos/" + pos)
       .then((response) => response.json())
       .then((data) => {
         setMethod(data);
