@@ -12,7 +12,11 @@ import RestoreIcon from "@material-ui/icons/Restore";
 import Button from "@material-ui/core/Button";
 
 export default function DataTable({ data, title }) {
-  const newData = data;
+  var savedData;
+  localStorage.getItem(title) == null
+    ? (savedData = data)
+    : (savedData = localStorage.getItem(title));
+
   const columns = useMemo(() => COLUMNS, []);
   const {
     getTableProps,
@@ -36,31 +40,30 @@ export default function DataTable({ data, title }) {
     if (localStorage.getItem(title) != null) {
       localStorage.removeItem(title);
     }
-    localStorage.setItem(title, JSON.stringify(newData));
+    localStorage.setItem(title, JSON.stringify(savedData));
     alert("clicked save button");
-    console.dir(localStorage.getItem(title));
   }
 
-  function reOrder(newData, before, after) {
+  function reOrder(savedData, before, after) {
     if (before < after) {
-      const original = newData[before];
+      const original = savedData[before];
       for (let i = before; i < after; i++) {
-        newData[i] = newData[i + 1];
+        savedData[i] = savedData[i + 1];
       }
-      newData[after] = original;
+      savedData[after] = original;
     } else {
       //  after > before
-      const original = newData[before];
-      for (let i = after; i > before; i--) {
-        newData[i] = newData[i - 1];
+      const original = savedData[before];
+      for (let i = before; i > after; i--) {
+        savedData[i] = savedData[i - 1];
       }
-      newData[after] = original;
+      savedData[after] = original;
     }
   }
 
   function renderSavedTable() {}
 
-  function renderNewDataTable(paramData) {
+  function rendersavedDataTable(paramData) {
     return (
       <>
         <div className="title">{title} </div>
@@ -73,7 +76,7 @@ export default function DataTable({ data, title }) {
             const srcIdx = param.source.index;
             const desIdx = param.destination.index;
             rows.splice(desIdx, 0, rows.splice(srcIdx, 1)[0]);
-            reOrder(newData, srcIdx, desIdx);
+            reOrder(savedData, srcIdx, desIdx);
           }}
         >
           <Droppable droppableId="droppable">
@@ -203,6 +206,6 @@ export default function DataTable({ data, title }) {
     );
   }
   return localStorage.getItem(title) == null
-    ? renderNewDataTable(data)
-    : renderNewDataTable(newData);
+    ? rendersavedDataTable(data)
+    : rendersavedDataTable(savedData);
 }
