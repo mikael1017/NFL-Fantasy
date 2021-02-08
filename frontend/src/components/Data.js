@@ -36,7 +36,7 @@ export default function Data() {
         <div className="table-div">
           {QBs && <PersonalList data={QBs} title="Quarterback" />}
         </div>
-        <div className="table-div">
+        {/* <div className="table-div">
           {RBs && <PersonalList data={RBs} title="Runningback" />}
         </div>
         <div className="table-div">
@@ -44,7 +44,7 @@ export default function Data() {
         </div>
         <div className="table-div">
           {TEs && <PersonalList data={TEs} title="Tight End" />}
-        </div>
+        </div> */}
       </div>
     </>
   );
