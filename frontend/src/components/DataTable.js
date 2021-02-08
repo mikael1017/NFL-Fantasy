@@ -13,10 +13,12 @@ import Button from "@material-ui/core/Button";
 
 export default function DataTable({ data, title }) {
   var savedData;
-  // localStorage.getItem(title) == null
-  //   ? (savedData = data)
-  //   : (savedData = JSON.parse(localStorage.getItem(title)));
+
   console.dir(savedData);
+  localStorage.getItem(title) == null
+    ? (savedData = data)
+    : (savedData = JSON.parse(localStorage.getItem(title)));
+
   const columns = useMemo(() => COLUMNS, []);
   const {
     getTableProps,
