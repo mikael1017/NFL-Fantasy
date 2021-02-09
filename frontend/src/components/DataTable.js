@@ -5,7 +5,6 @@ import "./DataTable.css";
 import PrintTable from "./PrintTable";
 export default function DataTable({ data, title }) {
   const [savedData, setSavedData] = useState();
-
   useEffect(() => {
     localStorage.getItem(title) == null
       ? setSavedData(data)
@@ -15,7 +14,7 @@ export default function DataTable({ data, title }) {
   return (
     <div>
       {savedData && (
-        <PrintTable originalData={data} data={savedData} title={title} />
+        <PrintTable originalData={data} givenData={savedData} title={title} />
       )}
     </div>
   );

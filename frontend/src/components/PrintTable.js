@@ -11,8 +11,8 @@ import SaveIcon from "@material-ui/icons/Save";
 import RestoreIcon from "@material-ui/icons/Restore";
 import Button from "@material-ui/core/Button";
 
-export default function PrintTable({ originalData, data, title }) {
-  console.log(data);
+export default function PrintTable({ originalData, givenData, title }) {
+  const [data, setData] = useState(givenData);
   const columns = useMemo(() => COLUMNS, []);
   const {
     getTableProps,
@@ -28,16 +28,20 @@ export default function PrintTable({ originalData, data, title }) {
     useSortBy
   );
 
-  function handleReset() {
-    alert("Clicked reset button");
-  }
-
-  function handleSave() {
+  function clearData() {
     if (localStorage.getItem(title) != null) {
       localStorage.removeItem(title);
     }
+  }
+  function handleReset() {
+    clearData();
+    window.location.reload();
+  }
+
+  function handleSave() {
+    clearData();
     localStorage.setItem(title, JSON.stringify(data));
-    alert("clicked save button");
+    alert("Your table is saved");
   }
 
   function reOrder(newData, before, after) {
