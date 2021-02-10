@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-
-import PersonalList from "./PersonalList";
+import DraftTable from "./DraftTable";
 import Button from "@material-ui/core/Button";
 
 import { Link, useParams } from "react-router-dom";
@@ -46,7 +45,7 @@ export default function DraftPage() {
 
       {/* <Grid item xs={12} align="center"> */}
       <div className="table-div">
-        {data && <PersonalList data={data} title="Player List" />}
+        {data && <DraftTable data={data} title="Player List" />}
       </div>
       {/* </Grid> */}
     </Grid>

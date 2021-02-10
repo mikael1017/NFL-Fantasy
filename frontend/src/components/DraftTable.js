@@ -8,13 +8,13 @@ import {
 } from "react-table";
 import { useSticky } from "react-table-sticky";
 import { COLUMNS } from "./columns";
-import "./DataTable.css";
 import { Styles } from "./TableStyles";
 import SortUpIcon from "./Icons/SortUp.js";
 import SortDownIcon from "./Icons/SortDown.js";
 import { GlobalFilter } from "./GlobalFilter";
+import "./table.css";
 
-export default function StickyTable({ data, title }) {
+export default function DraftTable({ data, title }) {
   const columns = useMemo(() => COLUMNS, []);
 
   const {
@@ -30,7 +30,6 @@ export default function StickyTable({ data, title }) {
       columns,
       data,
     },
-    useFilters,
     useGlobalFilter,
     useSticky,
     useSortBy,
@@ -74,9 +73,7 @@ export default function StickyTable({ data, title }) {
                           ""
                         )}
                       </span>
-                      <div className="filter">
-                        {column.canFilter ? column.render("Filter") : null}
-                      </div>
+                      }
                     </div>
                   </>
                 ))}
