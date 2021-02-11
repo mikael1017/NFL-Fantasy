@@ -5,6 +5,7 @@ import {
   useBlockLayout,
   useFilters,
   useGlobalFilter,
+  useRowSelect,
 } from "react-table";
 import { useSticky } from "react-table-sticky";
 import { COLUMNS } from "./columns";
@@ -13,6 +14,7 @@ import SortUpIcon from "./Icons/SortUp.js";
 import SortDownIcon from "./Icons/SortDown.js";
 import { GlobalFilter } from "./GlobalFilter";
 import "./table.css";
+import { Checkbox } from "./Checkbox.js";
 
 export default function DraftTable({ data, title }) {
   const columns = useMemo(() => COLUMNS, []);
@@ -25,6 +27,7 @@ export default function DraftTable({ data, title }) {
     prepareRow,
     state,
     setGlobalFilter,
+    selectedFlatRows,
   } = useTable(
     {
       columns,
@@ -33,7 +36,24 @@ export default function DraftTable({ data, title }) {
     useGlobalFilter,
     useSticky,
     useSortBy,
-    useBlockLayout
+    useBlockLayout,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => {
+        return [
+          {
+            id: "selection",
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
+            ),
+            Cell: ({ row }) => (
+              <Checkbox {...row.getToggleRowSelectedProps()} />
+            ),
+          },
+          ...columns,
+        ];
+      });
+    }
   );
 
   const { globalFilter } = state;
@@ -73,7 +93,6 @@ export default function DraftTable({ data, title }) {
                           ""
                         )}
                       </span>
-                      }
                     </div>
                   </>
                 ))}
@@ -97,6 +116,17 @@ export default function DraftTable({ data, title }) {
           </div>
         </div>
       </Styles>
+      <pre>
+        <code>
+          {JSON.stringify(
+            {
+              selectedFlatRows: selectedFlatRows.map((row) => row.original),
+            },
+            null,
+            2
+          )}
+        </code>
+      </pre>
     </>
   );
 }

@@ -2,6 +2,7 @@
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  font-weight: 600;
 }
 
 #players .td,
@@ -25,4 +26,10 @@ tfoot .td {
   text-align: center;
   background-color: #4caf50;
   color: white;
+}
+
+.filter-text {
+  text-align: center;
+  font-weight: 800;
+  padding-left: 1rem;
 }
