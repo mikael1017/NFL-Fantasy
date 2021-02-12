@@ -3,7 +3,6 @@ import {
   useTable,
   useSortBy,
   useBlockLayout,
-  useFilters,
   useGlobalFilter,
   useRowSelect,
 } from "react-table";
@@ -21,10 +20,25 @@ export default function DraftTable({ data, title }) {
   const [isSelected, setSelected] = useState(false);
   const [selectedRow, setSelectedRow] = useState();
 
+  //    called when checkbox is clicked
+  //    update variable isSelected where it stores if row is stored or not
   function handleSelect(e) {
     setSelected(e.target.checked);
+    setSelectedRow(
+      JSON.stringify(
+        {
+          selectedFlatRows: selectedFlatRows.map((row) => row.original),
+        },
+        null,
+        2
+      )
+    );
+    console.dir(selectedRow);
   }
 
+  function handleSelectedRow(e) {
+    selectedFlatRows.map((row) => row.original);
+  }
   const {
     getTableProps,
     getTableBodyProps,
@@ -131,6 +145,7 @@ export default function DraftTable({ data, title }) {
       </Styles>
       <pre>
         <code>
+          {console.log(selectedFlatRows.map((row) => row.original))}
           {JSON.stringify(
             {
               selectedFlatRows: selectedFlatRows.map((row) => row.original),
