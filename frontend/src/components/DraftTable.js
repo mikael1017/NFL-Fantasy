@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useRef, useMemo, useState } from "react";
 import {
   useTable,
   useSortBy,
@@ -18,6 +18,12 @@ import { Checkbox } from "./Checkbox.js";
 
 export default function DraftTable({ data, title }) {
   const columns = useMemo(() => COLUMNS, []);
+  const [isSelected, setSelected] = useState(false);
+  const [selectedRow, setSelectedRow] = useState();
+
+  function handleSelect(e) {
+    setSelected(e.target.checked);
+  }
 
   const {
     getTableProps,
@@ -42,12 +48,17 @@ export default function DraftTable({ data, title }) {
       hooks.visibleColumns.push((columns) => {
         return [
           {
-            id: "selection",
+            accessor: "selection",
+            sticky: "left",
             Header: ({ getToggleAllRowsSelectedProps }) => (
               <Checkbox {...getToggleAllRowsSelectedProps()} />
             ),
             Cell: ({ row }) => (
-              <Checkbox {...row.getToggleRowSelectedProps()} />
+              <Checkbox
+                onClick={handleSelect}
+                className="check-column"
+                {...row.getToggleRowSelectedProps()}
+              />
             ),
           },
           ...columns,
@@ -105,11 +116,13 @@ export default function DraftTable({ data, title }) {
 
               return (
                 <div className="tr" {...row.getRowProps()}>
-                  {row.cells.map((cell) => (
-                    <div className="td" {...cell.getCellProps()}>
-                      {cell.render("Cell")}
-                    </div>
-                  ))}
+                  {row.cells.map((cell) => {
+                    return (
+                      <div className="td" {...cell.getCellProps()}>
+                        {cell.render("Cell")}
+                      </div>
+                    );
+                  })}
                 </div>
               );
             })}

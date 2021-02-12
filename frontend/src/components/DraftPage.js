@@ -37,17 +37,13 @@ export default function DraftPage() {
           Leave
         </Button>
       </Grid>
-
       <Grid item xs={12} align="center">
         <Typography className="title">Welcome to the Mock Draft!</Typography>
       </Grid>
-      {createTable(NumOfPlayer)}
-
-      {/* <Grid item xs={12} align="center"> */}
+      {createTable(NumOfPlayer)}}
       <div className="table-div">
         {data && <DraftTable data={data} title="Player List" />}
       </div>
-      {/* </Grid> */}
     </Grid>
   );
 }

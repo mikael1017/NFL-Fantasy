@@ -76,7 +76,8 @@ tfoot td {
   border-left: solid 2px #ddefef;
   border-right: solid 2px #ddefef;
 }
-.sticky-column {
+.sticky-column,
+.check-column {
   position: sticky;
   background: #4caf50;
   border-left: solid 2px #ddefef;

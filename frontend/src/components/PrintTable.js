@@ -142,6 +142,7 @@ export default function PrintTable({ originalData, givenData, title }) {
                               }}
                             >
                               {row.cells.map((cell) => {
+                                console.log(cell);
                                 return (
                                   <td
                                     className={
