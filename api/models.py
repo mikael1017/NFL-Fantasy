@@ -31,3 +31,7 @@ class Player(models.Model):
     fpts = models.FloatField(null=True)
     ppr = models.FloatField(null=True)
     totGames = models.IntegerField(null=True)
+
+
+class DraftedPlayer(Player):
+    pickedTeam = models.IntegerField(null=True)
