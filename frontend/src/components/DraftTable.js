@@ -14,6 +14,7 @@ import SortDownIcon from "./Icons/SortDown.js";
 import { GlobalFilter } from "./GlobalFilter";
 import "./table.css";
 import { Checkbox } from "./Checkbox.js";
+import Button from "@material-ui/core/Button";
 
 export default function DraftTable({ data, title }) {
   const columns = useMemo(() => COLUMNS, []);
@@ -84,65 +85,78 @@ export default function DraftTable({ data, title }) {
   const { globalFilter } = state;
   return (
     <>
-      <div className="title">{title} </div>
-      <GlobalFilter
-        className="global-filter"
-        filter={globalFilter}
-        setFilter={setGlobalFilter}
-      />
-      <Styles>
-        <div
-          id="players"
-          className="table sticky"
-          style={{ width: 1000, height: 500 }}
-          {...getTableProps()}
-        >
-          <div className="header">
-            {headerGroups.map((headerGroup) => (
-              <div className="tr" {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <>
-                    <div
-                      className="th"
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                    >
-                      {column.render("Header")}
-                      <span className="sort-icon">
-                        {column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <SortUpIcon />
-                          ) : (
-                            <SortDownIcon />
-                          )
-                        ) : (
-                          ""
+      <div id="table-container">
+        <div className="title">{title} </div>
+        <GlobalFilter
+          className="global-filter"
+          filter={globalFilter}
+          setFilter={setGlobalFilter}
+        />
+        <Styles>
+          <div
+            id="players"
+            className="table sticky"
+            style={{ width: 1000, height: 500 }}
+            {...getTableProps()}
+          >
+            <div className="header">
+              {headerGroups.map((headerGroup) => (
+                <div className="tr" {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <>
+                      <div
+                        className="th"
+                        {...column.getHeaderProps(
+                          column.getSortByToggleProps()
                         )}
-                      </span>
-                    </div>
-                  </>
-                ))}
-              </div>
-            ))}
-          </div>
-          <div className="body" {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-
-              return (
-                <div className="tr" {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <div className="td" {...cell.getCellProps()}>
-                        {cell.render("Cell")}
+                      >
+                        {column.render("Header")}
+                        <span className="sort-icon">
+                          {column.isSorted ? (
+                            column.isSortedDesc ? (
+                              <SortUpIcon />
+                            ) : (
+                              <SortDownIcon />
+                            )
+                          ) : (
+                            ""
+                          )}
+                        </span>
                       </div>
-                    );
-                  })}
+                    </>
+                  ))}
                 </div>
-              );
-            })}
+              ))}
+            </div>
+            <div className="body" {...getTableBodyProps()}>
+              {rows.map((row) => {
+                prepareRow(row);
+
+                return (
+                  <div className="tr" {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <div className="td" {...cell.getCellProps()}>
+                          {cell.render("Cell")}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </Styles>
+        </Styles>
+      </div>
+      <div className="draft-btn">
+        <Button
+          color="primary"
+          // startIcon={<SaveIcon />}
+          variant="contained"
+        >
+          Draft
+        </Button>
+      </div>
       <pre>
         <code>
           {console.log(selectedFlatRows.map((row) => row.original))}

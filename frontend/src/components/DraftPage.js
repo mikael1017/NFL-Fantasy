@@ -3,13 +3,13 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import DraftTable from "./DraftTable";
 import Button from "@material-ui/core/Button";
-
+import "./Draft.css";
 import { Link, useParams } from "react-router-dom";
 
 function createTable(num) {
   const items = [];
   for (let i = 0; i < num; i++) {
-    items.push(<div>Hello</div>);
+    items.push(<div id={i}>Drafted div {i}</div>);
   }
   return items;
 }
@@ -26,24 +26,26 @@ export default function DraftPage() {
       });
   }, []);
   return (
-    <Grid className="buttons" container spacing={1}>
-      <Grid item xs={12} align="left">
-        <Button
-          color="secondary"
-          variant="contained"
-          to="/draft"
-          component={Link}
-        >
-          Leave
-        </Button>
+    <>
+      <Grid className="buttons" container spacing={1}>
+        <Grid item xs={12} align="left">
+          <Button
+            color="secondary"
+            variant="contained"
+            to="/draft"
+            component={Link}
+          >
+            Leave
+          </Button>
+        </Grid>
       </Grid>
-      <Grid item xs={12} align="center">
+      <div item xs={12} align="center">
         <Typography className="title">Welcome to the Mock Draft!</Typography>
-      </Grid>
-      {createTable(NumOfPlayer)}}
+      </div>
+      {createTable(NumOfPlayer)}
       <div className="table-div">
         {data && <DraftTable data={data} title="Player List" />}
       </div>
-    </Grid>
+    </>
   );
 }
