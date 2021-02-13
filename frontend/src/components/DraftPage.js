@@ -17,6 +17,15 @@ function createTable(num) {
 export default function DraftPage() {
   const { NumOfPlayer } = useParams();
   const [data, setData] = useState();
+  const { currentPick, setPick } = useState(0);
+
+  function nextPick() {
+    if (currentPick == NumOfPlayer - 1) {
+      setPick(0);
+    } else {
+      setPick(currentPick + 1);
+    }
+  }
 
   useEffect(() => {
     fetch("../api/player")

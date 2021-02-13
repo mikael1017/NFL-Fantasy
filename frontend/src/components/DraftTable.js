@@ -5,6 +5,7 @@ import {
   useBlockLayout,
   useGlobalFilter,
   useRowSelect,
+  toggleAllRowsSelected,
 } from "react-table";
 import { useSticky } from "react-table-sticky";
 import { COLUMNS } from "./columns";
@@ -23,18 +24,22 @@ export default function DraftTable({ data, title }) {
 
   //    called when checkbox is clicked
   //    update variable isSelected where it stores if row is stored or not
-  function handleSelect(e) {
-    setSelected(e.target.checked);
-    setSelectedRow(
-      JSON.stringify(
-        {
-          selectedFlatRows: selectedFlatRows.map((row) => row.original),
-        },
-        null,
-        2
-      )
-    );
-    console.dir(selectedRow);
+  // function handleSelect(e) {
+  //   setSelected(e.target.checked);
+  //   setSelectedRow(
+  //     JSON.stringify(
+  //       {
+  //         selectedFlatRows: selectedFlatRows.map((row) => row.original),
+  //       },
+  //       null,
+  //       2
+  //     )
+  //   );
+  //   console.dir(selectedRow);
+  // }
+
+  function handleDraftButton() {
+    console.log(console.log(selectedFlatRows.map((row) => row.original)));
   }
 
   function handleSelectedRow(e) {
@@ -49,6 +54,7 @@ export default function DraftTable({ data, title }) {
     state,
     setGlobalFilter,
     selectedFlatRows,
+    toggleAllRowsSelected,
   } = useTable(
     {
       columns,
@@ -70,7 +76,10 @@ export default function DraftTable({ data, title }) {
             ),
             Cell: ({ row }) => (
               <Checkbox
-                onClick={handleSelect}
+                onClick={() => {
+                  toggleAllRowsSelected(false);
+                  row.toggleRowSelected();
+                }}
                 className="check-column"
                 {...row.getToggleRowSelectedProps()}
               />
@@ -153,13 +162,13 @@ export default function DraftTable({ data, title }) {
           color="primary"
           // startIcon={<SaveIcon />}
           variant="contained"
+          onClick={handleDraftButton}
         >
           Draft
         </Button>
       </div>
       <pre>
         <code>
-          {console.log(selectedFlatRows.map((row) => row.original))}
           {JSON.stringify(
             {
               selectedFlatRows: selectedFlatRows.map((row) => row.original),
