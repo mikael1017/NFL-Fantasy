@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import PlayerSerializer, DraftedPlayerSerializer
-from .models import Player
+from .models import Player, DraftedPlayer
 from django.http import JsonResponse
 from rest_framework import status
 
@@ -25,7 +25,6 @@ def HomeView(request):
 def PlayerView(request):
     players = Player.objects.all()
     serializer = PlayerSerializer(players, many=True)
-
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -41,12 +40,3 @@ def PlayerFilterPosView(request, position):
     players = Player.objects.filter(position__icontains=position)
     serializer = PlayerSerializer(players, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@api_vew(['PUT'])
-def DraftedPlayerView(request):
-    serializer = DraftedPlayerSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)

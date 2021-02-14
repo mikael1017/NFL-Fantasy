@@ -1,6 +1,6 @@
 # take our models and translate into json
 from rest_framework import serializers
-from .models import Player, DraftedPlayer
+from .models import *
 
 
 class PlayerSerializer(serializers.ModelSerializer):
