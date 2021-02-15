@@ -3,6 +3,6 @@ from .views import *
 
 urlpatterns = [
 
-    path('draft', DraftPlayerView, name="drafted-player"),
+    path('draft/<team>', DraftPlayerView, name="drafted-player"),
     path('<pk>/delete', PlayerDeleteView, name="delete-player")
 ]
