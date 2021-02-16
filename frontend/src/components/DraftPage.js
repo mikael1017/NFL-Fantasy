@@ -53,7 +53,13 @@ export default function DraftPage() {
       </div>
       {createTable(NumOfPlayer)}
       <div className="table-div">
-        {data && <DraftTable data={data} title="Player List" />}
+        {data && (
+          <DraftTable
+            data={data}
+            title="Player List"
+            numPlayers={NumOfPlayer}
+          />
+        )}
       </div>
     </>
   );

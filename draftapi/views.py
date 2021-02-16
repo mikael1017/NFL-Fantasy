@@ -12,7 +12,8 @@ from rest_framework import status
 
 @api_view(['POST'])
 def DraftPlayerView(request, team):
-    serializer = DraftedPlayerSerializer(data=request.data)
+    drafted_player = DraftedPlayer
+    serializer = DraftedPlayerSerializer(data=request.data, pickedTeam={})
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

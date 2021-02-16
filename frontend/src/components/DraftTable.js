@@ -17,10 +17,19 @@ import "./table.css";
 import { Checkbox } from "./Checkbox.js";
 import Button from "@material-ui/core/Button";
 
-export default function DraftTable({ data, title }) {
+export default function DraftTable({ data, title, numPlayers }) {
   const columns = useMemo(() => COLUMNS, []);
   const [isSelected, setSelected] = useState(false);
   const [selectedRow, setSelectedRow] = useState();
+  const { currentPick, setPick } = useState(0);
+
+  function nextPick() {
+    if (currentPick == numPlayers - 1) {
+      setPick(0);
+    } else {
+      setPick(currentPick + 1);
+    }
+  }
 
   //    called when checkbox is clicked
   //    update variable isSelected where it stores if row is stored or not
@@ -37,9 +46,32 @@ export default function DraftTable({ data, title }) {
   //   );
   //   console.dir(selectedRow);
   // }
+  function postDraftedPlayer(player_data) {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: { player_data },
+    };
+    fetch("/draft/${currentPick}", requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          alert("succesfully drafted a player");
+        } else {
+          alert("Error !");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   function handleDraftButton() {
-    console.log(console.log(selectedFlatRows.map((row) => row.original)));
+    postDraftedPlayer(
+      JSON.stringify({
+        selectedFlatRows: selectedFlatRows.map((row) => row.original),
+      })
+    );
+    nextPick();
   }
 
   function handleSelectedRow(e) {
