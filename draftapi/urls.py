@@ -4,5 +4,6 @@ from .views import DraftPlayerView, PlayerDeleteView
 urlpatterns = [
 
     path('draft/<team>', DraftPlayerView, name="drafted-player"),
-    path('<pk>/delete', PlayerDeleteView, name="delete-player")
+    path('<pk>/delete', PlayerDeleteView, name="delete-player"),
+    path('draft', DraftPlayerView, name="all-drafted-players")
 ]

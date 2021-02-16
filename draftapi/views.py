@@ -10,14 +10,23 @@ from rest_framework import status
 # Create your views here.
 
 
-@api_view(['POST'])
-def DraftPlayerView(request, team):
-    drafted_player = DraftedPlayer
-    serializer = DraftedPlayerSerializer(data=request.data, pickedTeam={})
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['GET', 'POST'])
+def DraftPlayerView(request):
+    drafted_player = Player.objects.all()
+    if request.method == 'GET':
+        serializer = DraftedPlayerSerializer(drafted_player, many=True)
+        return Response(serializer.data)
+
+    if request.method == 'POST':
+        serializer = DraftedPlayerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# @api_view(['GET'])
+# def DraftTeamView(request):
 
 
 @api_view(['DELETE'])

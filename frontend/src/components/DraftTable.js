@@ -20,14 +20,16 @@ import Button from "@material-ui/core/Button";
 export default function DraftTable({ data, title, numPlayers }) {
   const columns = useMemo(() => COLUMNS, []);
   const [isSelected, setSelected] = useState(false);
-  const [selectedRow, setSelectedRow] = useState();
-  const { currentPick, setPick } = useState(0);
+  // const [selectedRow, setSelectedRow] = useState();
+  const [currentPick, setPick] = useState(0);
 
-  function nextPick() {
+  var selectedRow = {};
+  function nextPick(setMethod) {
     if (currentPick == numPlayers - 1) {
-      setPick(0);
+      setMethod(0);
     } else {
-      setPick(currentPick + 1);
+      let next = currentPick + 1;
+      setMethod(next);
     }
   }
 
@@ -47,12 +49,13 @@ export default function DraftTable({ data, title, numPlayers }) {
   //   console.dir(selectedRow);
   // }
   function postDraftedPlayer(player_data) {
+    console.log(player_data);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: { player_data },
     };
-    fetch("/draft/${currentPick}", requestOptions)
+    fetch(`/draftapi/draft/${currentPick}`, requestOptions)
       .then((response) => {
         if (response.ok) {
           alert("succesfully drafted a player");
@@ -66,12 +69,10 @@ export default function DraftTable({ data, title, numPlayers }) {
   }
 
   function handleDraftButton() {
-    postDraftedPlayer(
-      JSON.stringify({
-        selectedFlatRows: selectedFlatRows.map((row) => row.original),
-      })
-    );
-    nextPick();
+    // console.log(currentPick);
+    // console.log(selectedRow.id);
+    postDraftedPlayer(selectedRow);
+    nextPick(setPick);
   }
 
   function handleSelectedRow(e) {
@@ -194,13 +195,18 @@ export default function DraftTable({ data, title, numPlayers }) {
           color="primary"
           // startIcon={<SaveIcon />}
           variant="contained"
-          onClick={handleDraftButton}
+          onClick={() => {
+            selectedRow = selectedFlatRows.map((row) => row.original)[0];
+
+            handleDraftButton();
+          }}
         >
           Draft
         </Button>
       </div>
       <pre>
         <code>
+          {/* {console.log(selectedFlatRows.map((row) => row.original)[0])} */}
           {JSON.stringify(
             {
               selectedFlatRows: selectedFlatRows.map((row) => row.original),
