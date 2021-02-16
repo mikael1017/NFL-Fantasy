@@ -10,29 +10,44 @@ from rest_framework import status
 # Create your views here.
 
 
+@api_view(['GET'])
+def AllDraftedPlayerView(request):
+    drafted_players = DraftedPlayer.objects.all()
+    serializer = DraftedPlayerSerializer(drafted_players, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['GET', 'POST'])
-def DraftPlayerView(request):
-    drafted_player = Player.objects.all()
+def DraftPlayerView(request, team):
+    drafted_players = DraftedPlayer.objects.filter(pickedTeam__icontains=team)
     if request.method == 'GET':
-        serializer = DraftedPlayerSerializer(drafted_player, many=True)
+        serializer = DraftedPlayerSerializer(drafted_players, many=True)
         return Response(serializer.data)
 
     if request.method == 'POST':
         serializer = DraftedPlayerSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(pickedTeam=team)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-# @api_view(['GET'])
-# def DraftTeamView(request):
 
 
 @api_view(['DELETE'])
 def PlayerDeleteView(request, pk):
     try:
-        player = Player.objects.get(id=pk)
+        player = DraftedPlayer.objects.get(id=pk)
+    except Player.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    operation = player.delete()
+    if operation:
+        return Response({'Message': 'Success'}, status=status.HTTP_200_OK)
+    return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def TeamClearView(request, team):
+    try:
+        player = DraftedPlayer.objects.filter(pickedTeam=team)
     except Player.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     operation = player.delete()
