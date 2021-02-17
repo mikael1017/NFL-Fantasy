@@ -22,16 +22,29 @@ export default function DraftTable({ data, title, numPlayers }) {
   const [isSelected, setSelected] = useState(false);
   // const [selectedRow, setSelectedRow] = useState();
   const [currentPick, setPick] = useState(0);
-
+  var pickOrders = getOrder();
   var selectedRow = {};
-  function nextPick(setMethod) {
-    if (currentPick == numPlayers - 1) {
-      setMethod(0);
-    } else {
-      let next = currentPick + 1;
-      setMethod(next);
+
+  function nextPick() {
+    if (currentPick + 1 == numPlayers * 2) {
+      setPick(pickOrders[0]);
     }
+    setPick(pickOrders[currentPick + 1]);
   }
+
+  function getOrder() {
+    var pickOrder = [];
+    for (let i = 0; i < numPlayers; i++) {
+      pickOrder.push(i);
+    }
+    for (let i = numPlayers - 1; i >= 0; i--) {
+      pickOrder.push(i);
+    }
+    return pickOrder;
+  }
+  //  append 2 * length of numPlayers
+  //  one with ascending order and another with descending order
+  //  0 1 2 3 4 5 6 7 7 6 5 4 3 2 1 0      0 1 2 3 4
 
   //    called when checkbox is clicked
   //    update variable isSelected where it stores if row is stored or not
@@ -71,7 +84,7 @@ export default function DraftTable({ data, title, numPlayers }) {
     // console.log(currentPick);
 
     postDraftedPlayer(selectedRow);
-    nextPick(setPick);
+    nextPick();
   }
 
   function handleSelectedRow(e) {
