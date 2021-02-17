@@ -58,3 +58,15 @@ def TeamClearView(request, team):
     if operation:
         return Response({'Message': 'Success'}, status=status.HTTP_200_OK)
     return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def ClearDraftView(request):
+    try:
+        player = DraftedPlayer.objects.all()
+    except Player.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    operation = player.delete()
+    if operation:
+        return Response({'Message': 'Success'}, status=status.HTTP_200_OK)
+    return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)

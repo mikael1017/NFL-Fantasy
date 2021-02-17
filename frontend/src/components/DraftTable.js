@@ -24,12 +24,12 @@ export default function DraftTable({ data, title, numPlayers }) {
   const [currentPick, setPick] = useState(0);
   var pickOrders = getOrder();
   var selectedRow = {};
-
   function nextPick() {
+    console.log(currentPick);
     if (currentPick + 1 == numPlayers * 2) {
-      setPick(pickOrders[0]);
+      return setPick(0);
     }
-    setPick(pickOrders[currentPick + 1]);
+    setPick(currentPick + 1);
   }
 
   function getOrder() {
@@ -67,7 +67,7 @@ export default function DraftTable({ data, title, numPlayers }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(player_data),
     };
-    fetch(`/draftapi/draft/${currentPick}/`, requestOptions)
+    fetch(`/draftapi/draft/${pickOrders[currentPick]}/`, requestOptions)
       .then((response) => {
         if (response.ok) {
           alert("succesfully drafted a player");
