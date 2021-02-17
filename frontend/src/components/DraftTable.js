@@ -42,25 +42,7 @@ export default function DraftTable({ data, title, numPlayers }) {
     }
     return pickOrder;
   }
-  //  append 2 * length of numPlayers
-  //  one with ascending order and another with descending order
-  //  0 1 2 3 4 5 6 7 7 6 5 4 3 2 1 0      0 1 2 3 4
 
-  //    called when checkbox is clicked
-  //    update variable isSelected where it stores if row is stored or not
-  // function handleSelect(e) {
-  //   setSelected(e.target.checked);
-  //   setSelectedRow(
-  //     JSON.stringify(
-  //       {
-  //         selectedFlatRows: selectedFlatRows.map((row) => row.original),
-  //       },
-  //       null,
-  //       2
-  //     )
-  //   );
-  //   console.dir(selectedRow);
-  // }
   function postDraftedPlayer(player_data) {
     const requestOptions = {
       method: "POST",
@@ -87,9 +69,6 @@ export default function DraftTable({ data, title, numPlayers }) {
     nextPick();
   }
 
-  function handleSelectedRow(e) {
-    selectedFlatRows.map((row) => row.original);
-  }
   const {
     getTableProps,
     getTableBodyProps,
@@ -217,7 +196,6 @@ export default function DraftTable({ data, title, numPlayers }) {
       </div>
       <pre>
         <code>
-          {/* {console.log(selectedFlatRows.map((row) => row.original)[0])} */}
           {JSON.stringify(
             {
               selectedFlatRows: selectedFlatRows.map((row) => row.original),
