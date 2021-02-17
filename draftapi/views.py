@@ -6,6 +6,8 @@ from .serializers import PlayerSerializer, DraftedPlayerSerializer
 from .models import Player, DraftedPlayer
 from django.http import JsonResponse
 from rest_framework import status
+import json
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -25,10 +27,12 @@ def DraftPlayerView(request, team):
         return Response(serializer.data)
 
     if request.method == 'POST':
+        # player = post_json['player_data']
         serializer = DraftedPlayerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(pickedTeam=team)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer)
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 

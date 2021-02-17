@@ -49,13 +49,12 @@ export default function DraftTable({ data, title, numPlayers }) {
   //   console.dir(selectedRow);
   // }
   function postDraftedPlayer(player_data) {
-    console.log(player_data);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: { player_data },
+      body: JSON.stringify(player_data),
     };
-    fetch(`/draftapi/draft/${currentPick}`, requestOptions)
+    fetch(`/draftapi/draft/${currentPick}/`, requestOptions)
       .then((response) => {
         if (response.ok) {
           alert("succesfully drafted a player");
@@ -70,7 +69,7 @@ export default function DraftTable({ data, title, numPlayers }) {
 
   function handleDraftButton() {
     // console.log(currentPick);
-    // console.log(selectedRow.id);
+
     postDraftedPlayer(selectedRow);
     nextPick(setPick);
   }
@@ -197,7 +196,6 @@ export default function DraftTable({ data, title, numPlayers }) {
           variant="contained"
           onClick={() => {
             selectedRow = selectedFlatRows.map((row) => row.original)[0];
-
             handleDraftButton();
           }}
         >
