@@ -22,12 +22,10 @@ export default function DraftTable({ data, title, numPlayers }) {
   const [newData, setNewData] = useState(data);
   const [isSelected, setSelected] = useState(false);
   const [currentPick, setPick] = useState(0);
-  console.log(currentPick);
   var pickOrders = getOrder();
   var selectedRow = {};
 
   function nextPick() {
-    console.log(currentPick);
     if (currentPick + 1 == numPlayers * 2) {
       return setPick(0);
     }
@@ -68,8 +66,8 @@ export default function DraftTable({ data, title, numPlayers }) {
 
   function deleteRow() {
     //  *** after deleting row, selectedrow id doesn't match with the table row index
-    let index = selectedRow.id - 1;
-    console.log(data[index]);
+    let index = newData.indexOf(selectedRow);
+    console.log(index);
     let draftData = [...newData];
     draftData.splice(index, 1);
     setNewData(draftData);
