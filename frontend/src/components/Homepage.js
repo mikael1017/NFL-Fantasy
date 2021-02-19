@@ -13,34 +13,37 @@ export default class Homepage extends Component {
 
   renderHomePage() {
     return (
-      <Grid className="container" spacing={3}>
-        <Grid className="child" item xs={12}>
-          <Typography className="title" variant="h3" compact="h3">
-            NFL Fantasy Helper
-          </Typography>
+      <>
+        <head>
+          <base href="/" />
+        </head>
+        <Grid className="container" spacing={3}>
+          <Grid className="child" item xs={12}>
+            <Typography className="title" variant="h3" compact="h3">
+              NFL Fantasy Helper
+            </Typography>
+          </Grid>
+          <Grid className="child-btn" item xs={12}>
+            <ButtonGroup disableElevation variant="contained" color="primary">
+              <Button color="primary" to="/draft" component={Link}>
+                Mock Draft
+              </Button>
+              <Button color="default" to="/list" component={Link}>
+                Make your own list
+              </Button>
+            </ButtonGroup>
+          </Grid>
         </Grid>
-        <Grid className="child-btn" item xs={12}>
-          <ButtonGroup disableElevation variant="contained" color="primary">
-            <Button color="primary" to="/draft" component={Link}>
-              Mock Draft
-            </Button>
-            <Button color="default" to="/list" component={Link}>
-              Make your own list
-            </Button>
-          </ButtonGroup>
-        </Grid>
-      </Grid>
+      </>
     );
   }
   render() {
     return (
       <Router>
-        <Switch>
-          <Route exact path="/" render={this.renderHomePage} />
-          <Route path="/draft" component={Draft} />
-          <Route path="/list" component={Data} />
-          <Route path="/mockdraft/:NumOfPlayer" component={DraftPage} />
-        </Switch>
+        <Route exact path="/" render={this.renderHomePage} />
+        <Route exact path="/draft" component={Draft} />
+        <Route path="/list/:people" component={Data} />
+        <Route path="/draft/:NumOfPlayer" component={DraftPage} />
       </Router>
     );
   }

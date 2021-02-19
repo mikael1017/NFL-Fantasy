@@ -20,7 +20,6 @@ import Button from "@material-ui/core/Button";
 export default function DraftTable({ data, title, numPlayers }) {
   const columns = useMemo(() => COLUMNS, []);
   const [isSelected, setSelected] = useState(false);
-  // const [selectedRow, setSelectedRow] = useState();
   const [currentPick, setPick] = useState(0);
   var pickOrders = getOrder();
   var selectedRow = {};
@@ -62,10 +61,21 @@ export default function DraftTable({ data, title, numPlayers }) {
       });
   }
 
-  function handleDraftButton() {
-    // console.log(currentPick);
+  //  delete row from rows of table.
 
+  function deleteRow() {
+    let index = selectedRow.id - 1;
+    //  tableRows[index].original is the selected row of table rows
+    // console.log(tableRows[index].original);
+    //  delete from the data
+    console.log(data[index]);
+    data.splice(index, 1);
+    console.log(data[index]);
+  }
+
+  function handleDraftButton() {
     postDraftedPlayer(selectedRow);
+    deleteRow();
     nextPick();
   }
 

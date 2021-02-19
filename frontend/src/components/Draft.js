@@ -55,7 +55,7 @@ export default function Draft() {
           <Button
             color="primary"
             variant="contained"
-            to={"/mockdraft/" + NumOfPlayer}
+            to={`/draft/${NumOfPlayer}`}
             component={Link}
           >
             Start Draft!
