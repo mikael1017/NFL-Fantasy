@@ -42,7 +42,7 @@ export default class Homepage extends Component {
       <Router>
         <Route exact path="/" render={this.renderHomePage} />
         <Route exact path="/draft" component={Draft} />
-        <Route path="/list/:people" component={Data} />
+        <Route path="/list" component={Data} />
         <Route path="/draft/:NumOfPlayer" component={DraftPage} />
       </Router>
     );
