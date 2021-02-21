@@ -5,27 +5,13 @@ import DraftTable from "./DraftTable";
 import Button from "@material-ui/core/Button";
 import "./Draft.css";
 import { Link, useParams } from "react-router-dom";
-
-function createTable(num) {
-  const items = [];
-  for (let i = 0; i < num; i++) {
-    items.push(<div id={i}>Drafted div {i}</div>);
-  }
-  return items;
-}
+import DraftTeam from "./DraftTeam";
 
 export default function DraftPage() {
   const { NumOfPlayer } = useParams();
   const [data, setData] = useState();
   const { currentPick, setPick } = useState(0);
-
-  function nextPick() {
-    if (currentPick == NumOfPlayer - 1) {
-      setPick(0);
-    } else {
-      setPick(currentPick + 1);
-    }
-  }
+  const [draftList, setDraftList] = useState();
 
   useEffect(() => {
     fetch("../api/player")
@@ -33,7 +19,35 @@ export default function DraftPage() {
       .then((data) => {
         setData(data);
       });
+    getPlayers(0);
   }, []);
+
+  async function getPlayers(teamNumber) {
+    return fetch(`/draftapi/draft/${teamNumber}/`).then((response) => {
+      return response.json().then((data) => {
+        // console.log(data);
+        return data;
+      });
+    });
+  }
+
+  function createTable(num) {
+    const items = [];
+    for (let i = 0; i < num; i++) {
+      let draftList;
+      getPlayers(i).then((data) => {
+        draftList = data;
+      });
+      items.push(
+        draftList && (
+          <DraftTeam data={data} teamNumber={i} id={i}>
+            Drafted Team {i}
+          </DraftTeam>
+        )
+      );
+    }
+    return items;
+  }
   return (
     <>
       <Grid className="buttons" container spacing={1}>
