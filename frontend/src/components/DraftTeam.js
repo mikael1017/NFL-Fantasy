@@ -18,7 +18,6 @@ import "./table.css";
 export default function DraftTeam({ teamNumber, data }) {
   const columns = useMemo(() => COLUMNS, []);
   const [newData, setNewData] = useState();
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -38,10 +37,13 @@ export default function DraftTeam({ teamNumber, data }) {
     useBlockLayout,
     useRowSelect
   );
-
   useEffect(() => {
     const interval = setInterval(getPlayers(teamNumber), 1000);
-  });
+    console.log(newData);
+  }, []);
+  if (!newData) {
+    return <div>not loaded {teamNumber} </div>;
+  }
 
   function getPlayers(teamNumber) {
     fetch(`/draftapi/draft/${teamNumber}/`)
@@ -58,6 +60,7 @@ export default function DraftTeam({ teamNumber, data }) {
   }
 
   const { globalFilter } = state;
+
   return (
     <>
       <div id="table-container">

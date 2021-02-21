@@ -34,16 +34,14 @@ export default function DraftPage() {
   function createTable(num) {
     const items = [];
     for (let i = 0; i < num; i++) {
-      let draftList;
-      getPlayers(i).then((data) => {
-        draftList = data;
-      });
+      // let draftList;
+      // getPlayers(i).then((data) => {
+      //   draftList = data;
+      // });
       items.push(
-        draftList && (
-          <DraftTeam data={data} teamNumber={i} id={i}>
-            Drafted Team {i}
-          </DraftTeam>
-        )
+        <DraftTeam data={data} teamNumber={i} id={i}>
+          Drafted Team {i}
+        </DraftTeam>
       );
     }
     return items;
@@ -66,7 +64,7 @@ export default function DraftPage() {
         <Typography className="title">Welcome to the Mock Draft!</Typography>
       </div>
       {createTable(NumOfPlayer)}
-      <div className="table-div">
+      {/* <div className="table-div">
         {data && (
           <DraftTable
             data={data}
@@ -74,7 +72,7 @@ export default function DraftPage() {
             numPlayers={NumOfPlayer}
           />
         )}
-      </div>
+      </div> */}
     </>
   );
 }
