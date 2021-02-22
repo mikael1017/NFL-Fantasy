@@ -40,11 +40,9 @@ export default function DraftTeam({ teamNumber, data }) {
   );
 
   useEffect(() => {
-    const interval = setInterval(getPlayers(teamNumber), 1000);
-    console.log(data);
-    console.log(newData);
+    //const interval = setInterval(getPlayers(teamNumber), 1000);
   }, []);
-  if (!newData) {
+  if (!data) {
     return <div>not loaded {teamNumber} </div>;
   }
 
