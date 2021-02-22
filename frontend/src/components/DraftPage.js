@@ -38,11 +38,14 @@ export default function DraftPage() {
       // getPlayers(i).then((data) => {
       //   draftList = data;
       // });
-      items.push(
-        <DraftTeam data={data} teamNumber={i} id={i}>
-          Drafted Team {i}
-        </DraftTeam>
-      );
+      data &&
+        items.push(
+          <Grid item xs={3} spacing={3}>
+            <DraftTeam data={data} teamNumber={i} id={i}>
+              Drafted Team {i}
+            </DraftTeam>
+          </Grid>
+        );
     }
     return items;
   }
@@ -59,11 +62,11 @@ export default function DraftPage() {
             Leave
           </Button>
         </Grid>
+        {createTable(NumOfPlayer)}
       </Grid>
       <div item xs={12} align="center">
         <Typography className="title">Welcome to the Mock Draft!</Typography>
       </div>
-      {createTable(NumOfPlayer)}
       {/* <div className="table-div">
         {data && (
           <DraftTable

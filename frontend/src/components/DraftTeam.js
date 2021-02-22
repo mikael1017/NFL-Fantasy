@@ -17,6 +17,7 @@ import "./table.css";
 
 export default function DraftTeam({ teamNumber, data }) {
   const columns = useMemo(() => COLUMNS, []);
+  console.log(data);
   const [newData, setNewData] = useState();
   const {
     getTableProps,
@@ -29,7 +30,7 @@ export default function DraftTeam({ teamNumber, data }) {
   } = useTable(
     {
       columns,
-      data: newData,
+      data: data,
     },
     useGlobalFilter,
     useSticky,
@@ -37,8 +38,10 @@ export default function DraftTeam({ teamNumber, data }) {
     useBlockLayout,
     useRowSelect
   );
+
   useEffect(() => {
     const interval = setInterval(getPlayers(teamNumber), 1000);
+    console.log(data);
     console.log(newData);
   }, []);
   if (!newData) {
@@ -64,7 +67,7 @@ export default function DraftTeam({ teamNumber, data }) {
   return (
     <>
       <div id="table-container">
-        <div className="title">{title} </div>
+        <div className="title">{teamNumber} </div>
         <GlobalFilter
           className="global-filter"
           filter={globalFilter}
@@ -74,7 +77,7 @@ export default function DraftTeam({ teamNumber, data }) {
           <div
             id="players"
             className="table sticky"
-            style={{ width: 100, height: 100 }}
+            style={{ width: 300, height: 500 }}
             {...getTableProps()}
           >
             <div className="header">
