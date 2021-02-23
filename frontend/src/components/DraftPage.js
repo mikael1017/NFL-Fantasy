@@ -28,7 +28,6 @@ export default function DraftPage() {
       .then((data) => {
         setData(data);
       });
-    getPlayers(0);
   }, []);
 
   function getPlayers(teamNumber, setMethod) {
@@ -97,7 +96,7 @@ export default function DraftPage() {
       let tempData = numToTeam(i);
       tempData &&
         items.push(
-          <Grid item xs={3} spacing={3}>
+          <Grid className="draft-team" item xs={3} sm={3} spacing={3}>
             <DraftTeam data={tempData} teamNumber={i} id={i}>
               Drafted Team {i}
             </DraftTeam>
@@ -108,7 +107,7 @@ export default function DraftPage() {
   }
   return (
     <>
-      <Grid className="draft-page" container spacing={1}>
+      <Grid className="buttons" container spacing={3}>
         <Grid item xs={12} align="left">
           <Button
             color="secondary"
