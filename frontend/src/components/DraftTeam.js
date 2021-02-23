@@ -65,7 +65,7 @@ export default function DraftTeam({ teamNumber, data }) {
   return (
     <>
       <div id="table-container">
-        <div className="title">{teamNumber} </div>
+        <div className="title">Team {teamNumber} </div>
         <GlobalFilter
           className="global-filter"
           filter={globalFilter}

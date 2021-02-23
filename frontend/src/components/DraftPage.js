@@ -31,37 +31,37 @@ export default function DraftPage() {
     getPlayers(0);
   }, []);
 
-  async function getPlayers(teamNumber, setMethod) {
+  function getPlayers(teamNumber, setMethod) {
     return fetch(`/draftapi/draft/${teamNumber}/`).then((response) => {
       return response.json().then((data) => {
-        setMethod(data);
+        teamToSetMethod(teamNumber, data);
       });
     });
   }
 
-  function teamToSetMethod(team) {
+  function teamToSetMethod(team, data) {
     if (team == 0) {
-      return setTeam0;
+      return setTeam0(data);
     }
     if (team == 1) {
-      return setTeam1;
+      return setTeam1(data);
     }
     if (team == 2) {
-      return setTeam2;
+      return setTeam2(data);
     }
     if (team == 3) {
-      return setTeam3;
+      return setTeam3(data);
     }
     if (team == 4) {
-      return setTeam4;
+      return setTeam4(data);
     }
     if (team == 5) {
-      return setTeam5;
+      return setTeam5(data);
     }
     if (team == 6) {
-      return setTeam6;
+      return setTeam6(data);
     }
-    return setTeam7;
+    return setTeam7(data);
   }
 
   function numToTeam(team) {
@@ -92,11 +92,13 @@ export default function DraftPage() {
   function createTable(num) {
     const items = [];
     for (let i = 0; i < num; i++) {
-      getPlayers(i, teamToSetMethod(i));
-      numToTeam(i) &&
+      console.log(i);
+      getPlayers(i);
+      let tempData = numToTeam(i);
+      tempData &&
         items.push(
           <Grid item xs={3} spacing={3}>
-            <DraftTeam data={team0} teamNumber={i} id={i}>
+            <DraftTeam data={tempData} teamNumber={i} id={i}>
               Drafted Team {i}
             </DraftTeam>
           </Grid>
@@ -106,7 +108,7 @@ export default function DraftPage() {
   }
   return (
     <>
-      <Grid className="buttons" container spacing={1}>
+      <Grid className="draft-page" container spacing={1}>
         <Grid item xs={12} align="left">
           <Button
             color="secondary"
