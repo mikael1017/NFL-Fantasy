@@ -10,8 +10,7 @@ import DraftTeam from "./DraftTeam";
 export default function DraftPage() {
   const { NumOfPlayer } = useParams();
   const [data, setData] = useState();
-  const { currentPick, setPick } = useState(0);
-  const [draftList, setDraftList] = useState();
+
   const [team0, setTeam0] = useState();
   const [team1, setTeam1] = useState();
   const [team2, setTeam2] = useState();
@@ -20,7 +19,8 @@ export default function DraftPage() {
   const [team5, setTeam5] = useState();
   const [team6, setTeam6] = useState();
   const [team7, setTeam7] = useState();
-  var teamData = {};
+  const [teamTables, setTeamTables] = useState();
+  var tables = [];
 
   useEffect(() => {
     fetch("../api/player")
@@ -28,12 +28,15 @@ export default function DraftPage() {
       .then((data) => {
         setData(data);
       });
-  }, []);
+    createTable(NumOfPlayer);
+    console.log(tables);
+  }, [data]);
 
   function getPlayers(teamNumber, setMethod) {
     return fetch(`/draftapi/draft/${teamNumber}/`).then((response) => {
       return response.json().then((data) => {
         teamToSetMethod(teamNumber, data);
+        tables = data;
       });
     });
   }
@@ -93,7 +96,7 @@ export default function DraftPage() {
     for (let i = 0; i < num; i++) {
       console.log(i);
       getPlayers(i);
-      let tempData = numToTeam(i);
+      let tempData = tables;
       tempData &&
         items.push(
           <Grid className="draft-team" item xs={3} sm={3} spacing={3}>
@@ -103,6 +106,8 @@ export default function DraftPage() {
           </Grid>
         );
     }
+    setTeamTables(items);
+    tables = items;
     return items;
   }
   return (
@@ -118,12 +123,12 @@ export default function DraftPage() {
             Leave
           </Button>
         </Grid>
-        {createTable(NumOfPlayer)}
+        {teamTables}
       </Grid>
       <div item xs={12} align="center">
         <Typography className="title">Welcome to the Mock Draft!</Typography>
       </div>
-      {/* <div className="table-div">
+      <div className="table-div">
         {data && (
           <DraftTable
             data={data}
@@ -131,7 +136,7 @@ export default function DraftPage() {
             numPlayers={NumOfPlayer}
           />
         )}
-      </div> */}
+      </div>
     </>
   );
 }

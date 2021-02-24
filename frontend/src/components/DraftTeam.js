@@ -39,12 +39,12 @@ export default function DraftTeam({ teamNumber, data }) {
     useRowSelect
   );
 
-  useEffect(() => {
-    //const interval = setInterval(getPlayers(teamNumber), 1000);
-  }, []);
-  if (!data) {
-    return <div>not loaded {teamNumber} </div>;
-  }
+  // useEffect(() => {
+  //   //const interval = setInterval(getPlayers(teamNumber), 1000);
+  // }, []);
+  // if (!data) {
+  //   return <div>not loaded {teamNumber} </div>;
+  // }
 
   function getPlayers(teamNumber) {
     fetch(`/draftapi/draft/${teamNumber}/`)
