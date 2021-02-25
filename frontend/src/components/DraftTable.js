@@ -67,7 +67,6 @@ export default function DraftTable({ data, title, numPlayers }) {
   function deleteRow() {
     //  *** after deleting row, selectedrow id doesn't match with the table row index
     let index = newData.indexOf(selectedRow);
-    console.log(index);
     let draftData = [...newData];
     draftData.splice(index, 1);
     setNewData(draftData);
