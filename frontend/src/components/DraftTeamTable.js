@@ -14,6 +14,7 @@ import SortUpIcon from "./Icons/SortUp.js";
 import SortDownIcon from "./Icons/SortDown.js";
 import { GlobalFilter } from "./GlobalFilter";
 import "./table.css";
+import "./Draft.css";
 
 export default function DraftTeamTable({ data, teamNumber }) {
   const columns = useMemo(() => COLUMNS, []);
@@ -44,7 +45,7 @@ export default function DraftTeamTable({ data, teamNumber }) {
   return (
     <>
       <div id="table-container">
-        <div className="title">Team {teamNumber} </div>
+        <div className="draft-team-title">Team {teamNumber} </div>
         <GlobalFilter
           className="global-filter"
           filter={globalFilter}
@@ -54,7 +55,7 @@ export default function DraftTeamTable({ data, teamNumber }) {
           <div
             id="players"
             className="table sticky"
-            style={{ width: 300, height: 500 }}
+            style={{ width: 300, height: 300 }}
             {...getTableProps()}
           >
             <div className="header">

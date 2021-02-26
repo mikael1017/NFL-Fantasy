@@ -32,6 +32,13 @@ export default function DraftTable({ data, title, numPlayers }) {
     setPick(currentPick + 1);
   }
 
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
   function getOrder() {
     var pickOrder = [];
     for (let i = 0; i < numPlayers; i++) {
@@ -76,6 +83,7 @@ export default function DraftTable({ data, title, numPlayers }) {
     postDraftedPlayer(selectedRow);
     deleteRow();
     nextPick();
+    scrollToTop();
   }
 
   const {

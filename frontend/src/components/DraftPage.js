@@ -32,22 +32,21 @@ export default function DraftPage() {
   }
   return (
     <>
-      <Grid className="buttons" container spacing={3}>
-        <Grid item xs={12} align="left">
-          <Button
-            color="secondary"
-            variant="contained"
-            to="/draft"
-            component={Link}
-          >
-            Leave
-          </Button>
-        </Grid>
-        {createTable(NumOfPlayer)}
-      </Grid>
+      <Button
+        color="secondary"
+        variant="contained"
+        to="/draft"
+        component={Link}
+      >
+        Leave
+      </Button>
       <div item xs={12} align="center">
         <Typography className="title">Welcome to the Mock Draft!</Typography>
       </div>
+      <Grid className="buttons" container spacing={3}>
+        {createTable(NumOfPlayer)}
+      </Grid>
+
       <div className="table-div">
         {data && (
           <DraftTable

@@ -11,6 +11,6 @@ div .title {
   padding-bottom: 0.5rem;
 }
 
-.buttons DraftTeam {
-  padding: 2rem;
+.draft-team-title {
+  font-size: 30px;
 }

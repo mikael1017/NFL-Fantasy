@@ -9,7 +9,7 @@ export default function DraftTeam({ teamNumber }) {
   useEffect(() => {
     const interval = setInterval(() => {
       getPlayers(teamNumber);
-    }, 5000);
+    }, 3000);
   }, []);
 
   function getPlayers(teamNumber) {
@@ -21,7 +21,7 @@ export default function DraftTeam({ teamNumber }) {
   }
 
   return (
-    <Grid className="draft-team" item xs={3} sm={3} spacing={3}>
+    <Grid className="draft-team" item xs>
       {data && <DraftTeamTable data={data} teamNumber={teamNumber} />}
     </Grid>
   );
