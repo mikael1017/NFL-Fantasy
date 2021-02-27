@@ -52,7 +52,7 @@ export default function DraftPage() {
         color="primary"
         onClick={handleReset}
         variant="contained"
-        to="/draft"
+        to={`/draft/${NumOfPlayer}`}
         component={Link}
         startIcon={<RestoreIcon />}
       >
