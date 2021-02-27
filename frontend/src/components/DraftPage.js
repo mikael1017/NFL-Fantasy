@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import "./Draft.css";
 import { Link, useParams } from "react-router-dom";
 import DraftTeam from "./DraftTeam";
+import RestoreIcon from "@material-ui/icons/Restore";
 
 export default function DraftPage() {
   const { NumOfPlayer } = useParams();
@@ -30,6 +31,12 @@ export default function DraftPage() {
     }
     return items;
   }
+
+  function handleReset() {
+    // delte request
+    return;
+  }
+
   return (
     <>
       <Button
@@ -39,6 +46,17 @@ export default function DraftPage() {
         component={Link}
       >
         Leave
+      </Button>
+
+      <Button
+        color="primary"
+        onClick={handleReset}
+        variant="contained"
+        to="/draft"
+        component={Link}
+        startIcon={<RestoreIcon />}
+      >
+        Reset
       </Button>
       <div item xs={12} align="center">
         <Typography className="title">Welcome to the Mock Draft!</Typography>
