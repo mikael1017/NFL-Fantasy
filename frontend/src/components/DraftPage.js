@@ -19,6 +19,7 @@ export default function DraftPage() {
         setData(data);
       });
   }, []);
+
   function createTable(num) {
     console.log("making tables");
     const items = [];
@@ -33,8 +34,20 @@ export default function DraftPage() {
   }
 
   function handleReset() {
-    // delte request
-    return;
+    const requestOptions = {
+      method: "DELETE",
+    };
+    fetch("/draftapi/clear/", requestOptions)
+      .then((response) => {
+        if (response.ok) {
+          alert("Draft reset successful");
+        } else {
+          alert("Error !");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
@@ -55,6 +68,7 @@ export default function DraftPage() {
         to={`/draft/${NumOfPlayer}`}
         component={Link}
         startIcon={<RestoreIcon />}
+        id="reset-btn"
       >
         Reset
       </Button>
