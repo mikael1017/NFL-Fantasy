@@ -211,7 +211,7 @@ export default function DraftTable({ data, title, numPlayers }) {
           Draft
         </Button>
       </div>
-      <pre>
+      {/* <pre>
         <code>
           {JSON.stringify(
             {
@@ -221,7 +221,7 @@ export default function DraftTable({ data, title, numPlayers }) {
             2
           )}
         </code>
-      </pre>
+      </pre> */}
     </>
   );
 }

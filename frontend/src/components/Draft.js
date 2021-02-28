@@ -11,6 +11,9 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
+import handleReset from "./DraftPage.js";
+import { useHistory } from "react-router-dom";
+
 export default function Draft() {
   const [NumOfPlayer, setNumOfPlayer] = useState(8);
 

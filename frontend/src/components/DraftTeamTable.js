@@ -18,7 +18,6 @@ import "./Draft.css";
 
 export default function DraftTeamTable({ data, teamNumber }) {
   const columns = useMemo(() => COLUMNS, []);
-  console.log(data);
 
   const {
     getTableProps,
@@ -45,7 +44,7 @@ export default function DraftTeamTable({ data, teamNumber }) {
   return (
     <>
       <div id="table-container">
-        <div className="draft-team-title">Team {teamNumber} </div>
+        <div className="draft-team-title">Team {teamNumber + 1} </div>
         <GlobalFilter
           className="global-filter"
           filter={globalFilter}

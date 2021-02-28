@@ -18,10 +18,10 @@ export default function DraftPage() {
       .then((data) => {
         setData(data);
       });
+    handleReset();
   }, []);
 
   function createTable(num) {
-    console.log("making tables");
     const items = [];
     for (let i = 0; i < num; i++) {
       items.push(
@@ -50,6 +50,13 @@ export default function DraftPage() {
       });
   }
 
+  function scrollToBot() {
+    window.scrollTo({
+      top: document.body.offsetHeight,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <>
       <Button
@@ -71,6 +78,14 @@ export default function DraftPage() {
         id="reset-btn"
       >
         Reset
+      </Button>
+      <Button
+        color="default"
+        onClick={scrollToBot}
+        variant="contained"
+        id="draft-table-btn"
+      >
+        Draft Table
       </Button>
       <div item xs={12} align="center">
         <Typography className="title">Welcome to the Mock Draft!</Typography>
