@@ -59,7 +59,7 @@ export default function DraftTable({ data, title, numPlayers }) {
     fetch(`/draftapi/draft/${pickOrders[currentPick]}/`, requestOptions)
       .then((response) => {
         if (response.ok) {
-          alert("succesfully drafted a player");
+          alert(`Team ${currentPick + 1} picked ${selectedRow.name}`);
         } else {
           alert("Error !");
         }

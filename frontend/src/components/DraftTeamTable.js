@@ -45,11 +45,11 @@ export default function DraftTeamTable({ data, teamNumber }) {
     <>
       <div id="table-container">
         <div className="draft-team-title">Team {teamNumber + 1} </div>
-        <GlobalFilter
+        {/* <GlobalFilter
           className="global-filter"
           filter={globalFilter}
           setFilter={setGlobalFilter}
-        />
+        /> */}
         <Styles>
           <div
             id="players"

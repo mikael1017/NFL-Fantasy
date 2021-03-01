@@ -85,7 +85,7 @@ export default function DraftPage() {
         variant="contained"
         id="draft-table-btn"
       >
-        Draft Table
+        Go to Draft Table
       </Button>
       <div item xs={12} align="center">
         <Typography className="title">Welcome to the Mock Draft!</Typography>
