@@ -72,7 +72,6 @@ export default function DraftTable({ data, title, numPlayers }) {
   //  delete row from rows of table.
 
   function deleteRow() {
-    //  *** after deleting row, selectedrow id doesn't match with the table row index
     let index = newData.indexOf(selectedRow);
     let draftData = [...newData];
     draftData.splice(index, 1);

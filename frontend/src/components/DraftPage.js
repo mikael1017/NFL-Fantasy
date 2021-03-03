@@ -98,7 +98,7 @@ export default function DraftPage() {
         {data && (
           <DraftTable
             data={data}
-            title="Player List"
+            title="Draft Table"
             numPlayers={NumOfPlayer}
           />
         )}
